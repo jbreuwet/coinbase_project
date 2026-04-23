@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: bronze
+    tables:
+      - name: trades
+        description: "Raw ETH-USD trade payloads from Coinbase WebSocket"
+        columns:
+          - name: id
+            description: "Auto-incremented primary key"
+          - name: raw_payload
+            description: "Raw JSONB trade payload from Coinbase"
+          - name: ingested_at
+            description: "Timestamp when the record was inserted into Postgres"
+
+models:
+  - name: stg_trades
+    description: "Cleaned and typed ETH-USD trades from the bronze layer"
+    columns:
+      - name: trade_id
+        description: "Unique trade identifier from Coinbase"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Trading pair, always ETH-USD"
+        tests:
+          - not_null
+      - name: side
+        description: "BUY or SELL"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['BUY', 'SELL']
+      - name: price
+        description: "Execution price"
+        tests:
+          - not_null
+      - name: size
+        description: "Trade size"
+        tests:
+          - not_null
+      - name: traded_at
+        description: "Actual exchange timestamp"
+        tests:
+          - not_null
