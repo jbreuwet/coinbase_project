@@ -35,7 +35,24 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+  
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./lakehouse:/lakehouse
+      - metabase_data:/metabase-data
+    environment:
+      MB_DB_TYPE: h2
+      MB_DB_FILE: /metabase-data/metabase.db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
 
 volumes:
   rabbitmq_data:
   postgres_data:
+  metabase_data:
