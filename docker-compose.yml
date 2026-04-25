@@ -37,7 +37,9 @@ services:
     restart: unless-stopped
   
   metabase:
-    image: metabase/metabase:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.metabase
     container_name: metabase
     ports:
       - "3000:3000"
