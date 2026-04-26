@@ -1,0 +1,21 @@
+FROM apache/airflow:3.1.8-python3.12
+
+USER root
+RUN apt-get update && apt-get install -y gcc g++ && \
+    curl -Ls https://astral.sh/uv/install.sh | sh
+
+ENV PATH="/root/.cargo/bin:$PATH"
+
+USER airflow
+COPY pyproject.toml uv.lock ./
+COPY src/ ./src/
+RUN uv sync --frozen --no-install-project
+RUN uv pip install \
+    dbt-postgres \
+    duckdb \
+    psycopg2-binary \
+    loguru \
+    python-dotenv \
+    pandas \
+    websockets \
+    aio-pika

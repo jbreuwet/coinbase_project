@@ -16,15 +16,6 @@ POSTGRES_DB   = os.getenv("POSTGRES_DB")
 
 DUCKLAKE_DATA_PATH = os.getenv("DUCKLAKE_DATA_PATH")
 
-DUCKLAKE_CATALOG= (
-    f"dbname=ducklake "
-    f"user={POSTGRES_USER} "
-    f"password={POSTGRES_PASS} "
-    f"host={POSTGRES_HOST} "
-    f"port={POSTGRES_PORT}"
-)
-
-
 def get_postgres_connection():
     pg_conn = psycopg2.connect(
         host=POSTGRES_HOST,
@@ -66,10 +57,9 @@ def load_to_ducklake(trades_df: pd.DataFrame):
     db_con.execute("INSTALL postgres;")
     db_con.execute("LOAD postgres;")
     
-    db_con.execute(f"""
-    ATTACH 'ducklake:dbname=ducklake user={POSTGRES_USER} password={POSTGRES_PASS} host={POSTGRES_HOST} port={POSTGRES_PORT}' 
-    AS lake (DATA_PATH '{DUCKLAKE_DATA_PATH}', DATA_INLINING_ROW_LIMIT 0)
-""")
+    attach_str = f"ATTACH 'ducklake:dbname=ducklake user={POSTGRES_USER} password={POSTGRES_PASS} host={POSTGRES_HOST} port={POSTGRES_PORT}' AS lake (DATA_PATH '{DUCKLAKE_DATA_PATH}', DATA_INLINING_ROW_LIMIT 0)"
+    db_con.execute(attach_str)
+    
     db_con.execute("USE lake;")
     
     db_con.execute("DROP TABLE IF EXISTS trades_1min")

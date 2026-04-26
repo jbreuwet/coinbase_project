@@ -13,6 +13,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+__init__.py
 
 # ── uv ────────────────────────────────────────────────────────────────────────
 .venv/
@@ -35,6 +36,7 @@ crypto_pipeline_dbt/target/
 crypto_pipeline_dbt/dbt_packages/
 crypto_pipeline_dbt/logs/
 profiles.yml
+.user.yml
 
 # ── Airflow ───────────────────────────────────────────────────────────────────
 airflow/logs/
@@ -58,3 +60,7 @@ desktop.ini
 *.iml
 *.swp
 *.swo
+
+
+
+dbname=ducklake user=admin password=admin123 host=localhost port=5432
