@@ -14,6 +14,7 @@ __pycache__/
 dist/
 build/
 __init__.py
+.python-version
 
 # ── uv ────────────────────────────────────────────────────────────────────────
 .venv/
@@ -60,7 +61,5 @@ desktop.ini
 *.iml
 *.swp
 *.swo
-
-
 
 dbname=ducklake user=admin password=admin123 host=localhost port=5432

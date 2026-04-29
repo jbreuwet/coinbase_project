@@ -57,9 +57,10 @@ def load_to_ducklake(trades_df: pd.DataFrame):
     db_con.execute("INSTALL postgres;")
     db_con.execute("LOAD postgres;")
     
-    attach_str = f"ATTACH 'ducklake:dbname=ducklake user={POSTGRES_USER} password={POSTGRES_PASS} host={POSTGRES_HOST} port={POSTGRES_PORT}' AS lake (DATA_PATH '{DUCKLAKE_DATA_PATH}', DATA_INLINING_ROW_LIMIT 0)"
-    db_con.execute(attach_str)
-    
+    db_con.execute(f"""
+    ATTACH 'ducklake:dbname=ducklake user={POSTGRES_USER} password={POSTGRES_PASS} host={POSTGRES_HOST} port={POSTGRES_PORT}' 
+    AS lake (DATA_PATH '{DUCKLAKE_DATA_PATH}', DATA_INLINING_ROW_LIMIT 0)
+""")
     db_con.execute("USE lake;")
     
     db_con.execute("DROP TABLE IF EXISTS trades_1min")
