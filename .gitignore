@@ -1,0 +1,65 @@
+# ── Environment & secrets ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+__init__.py
+.python-version
+
+# ── uv ────────────────────────────────────────────────────────────────────────
+.venv/
+.uv/
+uv.lock
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Ducklake & DuckDB ─────────────────────────────────────────────────────────
+*.db
+*.duckdb
+*.duckdb.wal
+lakehouse/lake_data/
+lakehouse/catalog.ducklake
+
+# ── dbt ───────────────────────────────────────────────────────────────────────
+crypto_pipeline_dbt/target/
+crypto_pipeline_dbt/dbt_packages/
+crypto_pipeline_dbt/logs/
+profiles.yml
+.user.yml
+
+# ── Airflow ───────────────────────────────────────────────────────────────────
+airflow/logs/
+airflow/plugins/
+standalone_admin_password.txt
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+docker-compose.override.yml
+
+# ── Metabase ──────────────────────────────────────────────────────────────────
+metabase-plugins/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDEs ──────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+
+dbname=ducklake user=admin password=admin123 host=localhost port=5432

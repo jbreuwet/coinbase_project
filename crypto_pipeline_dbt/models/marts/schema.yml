@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: trades_1min
+    description: "1-minute OHLCV and VWAP aggregations for ETH-USD trades"
+    columns:
+      - name: window_start
+        description: "Start of the 1-minute tumbling window"
+        tests:
+          - not_null
+      - name: window_end
+        description: "End of the 1-minute tumbling window"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Trading pair, always ETH-USD"
+        tests:
+          - not_null
+      - name: trade_count
+        description: "Number of trades"
+        tests:
+          - not_null
+      - name: vwap
+        description: "Volume weighted average price"
+        tests:
+          - not_null
+      - name: low_price
+        description: "Lowest execution price"
+        tests:
+          - not_null
+      - name: high_price
+        description: "Highest execution price"
+        tests:
+          - not_null
+      - name: total_volume
+        description: "Total ETH volume traded"
+        tests:
+          - not_null
+      - name: buy_volume
+        description: "Total ETH volume from BUY side"
+        tests:
+          - not_null
+      - name: sell_volume
+        description: "Total ETH volume from SELL side"
+        tests:
+          - not_null

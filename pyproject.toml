@@ -1,0 +1,17 @@
+[project]
+name = "coinbase-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aio-pika>=9.6.2",
+    "asyncpg>=0.31.0",
+    "dbt-postgres>=1.10.0",
+    "duckdb>=1.5.2",
+    "loguru>=0.7.3",
+    "pandas>=3.0.2",
+    "psycopg-binary>=3.3.3",
+    "python-dotenv>=1.2.2",
+    "websockets>=16.0",
+]
